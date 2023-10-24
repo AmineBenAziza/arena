@@ -1,0 +1,2 @@
+class Shield < Equipment
+end
