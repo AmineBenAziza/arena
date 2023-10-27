@@ -1,0 +1,46 @@
+= render '/partials/navbar'
+%main#main.main
+  .overlay
+  .pagetitle
+    %h1 Liste des combattants
+    = link_to "Ajouter combattant", new_fighter_path(), :class => "btn btn-primary float-end"
+    %nav
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{href: "/fights/new"} Arena
+        %li.breadcrumb-item.active combattants
+  %section.section.pt-0
+    .row
+      .col-lg-12
+        .card.pt-4
+          .card-body
+            %table.table.datatable.table-hover{style: "width:100%"}
+              %thead
+                %tr
+                  %th{scope: "col"} Nom
+                  %th{scope: "col"} Point de vie
+                  %th{scope: "col"} Point d'attaque
+                  %th{scope: "col"} Point d'experience
+                  %th{scope: "col"} Victoires
+                  %th{scope: "col"} Défaites
+                  %th{scope: "col"} Afficher
+                  %th{scope: "col"} Modifier
+                  %th{scope: "col"} Supprimer
+              %tbody
+                - @fighters.each do |fighter|
+                  %tr
+                    %td= fighter.name
+                    %td= fighter.life_points
+                    %td= fighter.attack_points
+                    %td= fighter.experience_points
+                    %td= fighter.wins_fight
+                    %td= fighter.lost_fight
+                    %td
+                      =link_to fighter do
+                        %i.fa-solid.fa-file
+                    %td
+                      =link_to  edit_fighter_path(fighter) do
+                        %i.fa-solid.fa-pen-to-square
+                    %td
+                      =link_to fighter, method: :delete, data: { confirm: "confirmer" } do
+                        %i.fa-solid.fa-trash-can

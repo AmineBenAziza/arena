@@ -1,0 +1,47 @@
+@import "~bootstrap/scss/bootstrap";
+
+.main {
+  height: auto;
+  position: relative;
+  padding: 20px 30px;
+  z-index: 1;
+  transition: all 0.3s;
+  .overlay {
+    content: "";
+    background: rgb(246 249 255 / 86%);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  .pagetitle{
+    h1 {
+      font-size: 24px;
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #012970;
+    }
+  }
+}
+
+.pagetitle {
+  margin-bottom: 10px;
+}
+.home_title {
+  text-align: center;
+  h1 {
+    font-weight: 600;
+    color: #012970;
+  }
+}
+
+.pagetitle {
+	h1 {
+		font-size: 24px;
+		margin-bottom: 0;
+		font-weight: 600;
+		color: #012970;
+	}
+}

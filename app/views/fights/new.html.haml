@@ -1,0 +1,48 @@
+= render '/partials/navbar'
+%main#main.main
+  .overlay
+  .home_title
+    %h1 Creer votre Combat
+  %section.section.pt-0
+  .row
+    .col-lg-12
+      .card.pt-4
+        .card-body
+          = form_for @fight do |f|
+            .row.mb-3
+              = f.fields_for :fight_participations do |participations_f|
+                .col-xl-5.col-lg-5.col-md-5.col-sm-12.col-xs-12
+                  .card.border-gray-300
+                    .card-header.bg-primary.bg-gradient.text-white.border-dark-subtle
+                      .d-flex.justify-content-between.align-baseline.fs-5
+                        %span.align-baseline.fs-5
+                          = "Combattant"
+                          = participations_f.index + 1
+                    .card-body.text-white.fs-6.p-3
+                      %ul.list-group.list-group-flush.price-list
+                        %li.list-group-item.border-secondary-subtle
+                          %p
+                            = participations_f.label :fighter_id, "Combattant:", class: "form-label"
+                            = participations_f.select :fighter_id, Fighter.all.map{|f| [f.name, f.id]}, {:include_blank => "Choisir Votre Combattant"}, class: "form-control", id: "select_fighter_#{participations_f.index}", required: :true
+                        %li.list-group-item.border-secondary-subtle
+                          %p
+                            %label.form-label= "Armes:"
+                            = participations_f.fields_for :fight_participation_weapons do |participation_weapon_f|
+                              = render "fight_participation_weapon_fields", f: participation_weapon_f
+                            .links.text-center
+                              = link_to_add_association  participations_f, :fight_participation_weapons do
+                                %i.fa-solid.fa-plus
+                        %li.list-group-item.border-secondary-subtle
+                          %p
+                            %label.form-label= "Boucliers:"
+                            = participations_f.fields_for :fight_participation_shields do |participation_shield_f|
+                              = render "fight_participation_shield_fields", f: participation_shield_f
+                            .links.text-center
+                              = link_to_add_association participations_f, :fight_participation_shields do
+                                %i.fa-solid.fa-plus
+                - if participations_f.index.zero?
+                  .col-md-2.align-self-center.text-center
+                    VS
+            .mb-3.text-center
+              = f.submit 'au combat', class: "btn btn-primary"
+
