@@ -1,0 +1,43 @@
+= render '/partials/navbar'
+%main#main.main
+  .overlay
+  .pagetitle
+    %h1 Liste des equipements
+    = link_to 'Ajouter equipement', new_equipment_path(), :class => "btn btn-primary float-end"
+
+    %nav
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{href: "/fights/new"} Arena
+        %li.breadcrumb-item.active equipements
+  %section.section.pt-0
+    .row
+      .col-lg-12
+        .card.pt-4
+          .card-body
+            %table.table.datatable.table-hover{style: "width:100%"}
+              %thead
+                %tr
+                  %th{scope: "col"} Nom
+                  %th{scope: "col"} Point d'attaque
+                  %th{scope: "col"} Point de defense
+                  %th{scope: "col"} Type
+                  %th{scope: "col"} Afficher
+                  %th{scope: "col"} Modifier
+                  %th{scope: "col"} Supprimer
+              %tbody
+                - @equipment.each do |equipment|
+                  %tr
+                    %td= equipment.name
+                    %td= equipment.attack_points
+                    %td= equipment.defense_points
+                    %td= equipment.type
+                    %td
+                      =link_to equipment_path(equipment, type: params[:type]) do
+                        %i.fa-solid.fa-file
+                    %td
+                      =link_to edit_equipment_path(equipment, type: params[:type]) do
+                        %i.fa-solid.fa-pen-to-square
+                    %td
+                      = link_to equipment, method: :delete, data: { confirm: "confirmer" } do
+                        %i.fa-solid.fa-trash-can

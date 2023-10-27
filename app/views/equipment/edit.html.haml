@@ -1,0 +1,13 @@
+= render '/partials/navbar'
+%main#main.main
+  .overlay
+  .pagetitle
+    %h1 Modifier Equipement
+    %nav
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{href: "/fights/new"} Arena
+        %li.breadcrumb-item
+          %a{href: "/equipment"} Equipements
+        %li.breadcrumb-item.active Equipement
+  = render 'form'

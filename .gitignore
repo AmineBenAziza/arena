@@ -34,3 +34,5 @@
 yarn-debug.log*
 .yarn-integrity
 database.yml
+/app/assets/builds/*
+!/app/assets/builds/.keep

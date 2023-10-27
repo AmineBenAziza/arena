@@ -21,4 +21,23 @@ describe Fighter do
       it { should have_many(:wins).class_name("Fight").with_foreign_key(:winner_id) }
     end
   end
+  describe '#max_experience' do
+    it 'limits experience points to 1000 if greater' do
+      fighter = create(:fighter, experience_points: 1200)
+      fighter.max_experience
+      expect(fighter.experience_points).to eq(1000)
+    end
+
+    it 'sets experience points to 0 if nil' do
+      fighter = create(:fighter, experience_points: nil)
+      fighter.max_experience
+      expect(fighter.experience_points).to eq(0)
+    end
+
+    it 'does not change experience points if within limits' do
+      fighter = create(:fighter, experience_points: 500)
+      fighter.max_experience
+      expect(fighter.experience_points).to eq(500)
+    end
+  end
 end
